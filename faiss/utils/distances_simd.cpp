@@ -15,6 +15,7 @@
 #include <cstdio>
 #include <cstring>
 
+#include <faiss/FaissHook.h>
 #include <faiss/impl/FaissAssert.h>
 #include <faiss/impl/platform_macros.h>
 #include <faiss/utils/simdlib.h>
@@ -188,7 +189,7 @@ void fvec_inner_products_ny_ref(
  */
 
 FAISS_PRAGMA_IMPRECISE_FUNCTION_BEGIN
-float fvec_inner_product(const float* x, const float* y, size_t d) {
+float fvec_inner_product_default(const float* x, const float* y, size_t d) {
     float res = 0.F;
     FAISS_PRAGMA_IMPRECISE_LOOP
     for (size_t i = 0; i != d; ++i) {
@@ -197,6 +198,10 @@ float fvec_inner_product(const float* x, const float* y, size_t d) {
     return res;
 }
 FAISS_PRAGMA_IMPRECISE_FUNCTION_END
+
+float fvec_inner_product(const float* x, const float* y, size_t d) {
+    return fvec_inner_product_hook(x, y, d);
+}
 
 FAISS_PRAGMA_IMPRECISE_FUNCTION_BEGIN
 float fvec_norm_L2sqr(const float* x, size_t d) {
@@ -212,8 +217,12 @@ float fvec_norm_L2sqr(const float* x, size_t d) {
 }
 FAISS_PRAGMA_IMPRECISE_FUNCTION_END
 
-FAISS_PRAGMA_IMPRECISE_FUNCTION_BEGIN
 float fvec_L2sqr(const float* x, const float* y, size_t d) {
+    return fvec_L2sqr_hook(x, y, d);
+}
+
+FAISS_PRAGMA_IMPRECISE_FUNCTION_BEGIN
+float fvec_L2sqr_default(const float* x, const float* y, size_t d) {
     size_t i;
     float res = 0;
     FAISS_PRAGMA_IMPRECISE_LOOP

@@ -52,6 +52,7 @@ set(FAISS_SRC
   VectorTransform.cpp
   clone_index.cpp
   index_factory.cpp
+  FaissHook.cpp
   impl/AuxIndexStructures.cpp
   impl/CodePacker.cpp
   impl/IDSelector.cpp
@@ -147,6 +148,7 @@ set(FAISS_HEADERS
   clone_index.h
   index_factory.h
   index_io.h
+  FaissHook.h
   impl/AdditiveQuantizer.h
   impl/AuxIndexStructures.h
   impl/CodePacker.h
