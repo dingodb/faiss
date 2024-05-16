@@ -356,6 +356,58 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacefaiss_1a84c1fcb90b8f43b811728da2e023648a" prot="public" static="no">
+        <type>float(*)(const float *, const float *, size_t)</type>
+        <definition>using faiss::FVEC_L2SQR_HOOK = typedef float (*)(const float*, const float*, size_t)</definition>
+        <argsstring></argsstring>
+        <name>FVEC_L2SQR_HOOK</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="faiss/FaissHook.h" line="17" column="1" bodyfile="faiss/FaissHook.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacefaiss_1adf4005199fbb1c9d8e71a665ffe0606f" prot="public" static="no">
+        <type>float(*)(const float *, const float *, size_t)</type>
+        <definition>using faiss::FVEC_INNER_PRODUCT_HOOK = typedef float (*)(const float*, const float*, size_t)</definition>
+        <argsstring></argsstring>
+        <name>FVEC_INNER_PRODUCT_HOOK</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="faiss/FaissHook.h" line="19" column="1" bodyfile="faiss/FaissHook.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacefaiss_1ae0f848a106a27b77a9b38f8dafbde99a" prot="public" static="no">
+        <type>float(*</type>
+        <definition>typedef float(* faiss::FVEC_L2SQR_HOOK_C) (const float *, const float *, size_t)</definition>
+        <argsstring>)(const float *, const float *, size_t)</argsstring>
+        <name>FVEC_L2SQR_HOOK_C</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="faiss/FaissHook.h" line="28" column="9" bodyfile="faiss/FaissHook.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacefaiss_1a8caa270e830a8fdad4af2bbe5d9308cc" prot="public" static="no">
+        <type>float(*</type>
+        <definition>typedef float(* faiss::FVEC_INNER_PRODUCT_HOOK_C) (const float *, const float *, size_t)</definition>
+        <argsstring>)(const float *, const float *, size_t)</argsstring>
+        <name>FVEC_INNER_PRODUCT_HOOK_C</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="faiss/FaissHook.h" line="29" column="9" bodyfile="faiss/FaissHook.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="typedef" id="namespacefaiss_1a73b36a88d6db5db6a15d165150e54348" prot="public" static="no">
         <type><ref refid="structfaiss_1_1IndexIDMapTemplate" kindref="compound">IndexIDMapTemplate</ref>&lt; <ref refid="structfaiss_1_1Index" kindref="compound">Index</ref> &gt;</type>
         <definition>using faiss::IndexIDMap = typedef IndexIDMapTemplate&lt;Index&gt;</definition>
@@ -554,6 +606,32 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacefaiss_1a6071d7ad51c4e211d052bebddb0a123c" prot="public" static="no" mutable="no">
+        <type>FVEC_L2SQR_HOOK</type>
+        <definition>FVEC_L2SQR_HOOK faiss::fvec_L2sqr_hook</definition>
+        <argsstring></argsstring>
+        <name>fvec_L2sqr_hook</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="faiss/FaissHook.h" line="21" column="24" declfile="faiss/FaissHook.h" declline="21" declcolumn="24"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefaiss_1adbb6b77c8f45838bfdfe4206897bf890" prot="public" static="no" mutable="no">
+        <type>FVEC_INNER_PRODUCT_HOOK</type>
+        <definition>FVEC_INNER_PRODUCT_HOOK faiss::fvec_inner_product_hook</definition>
+        <argsstring></argsstring>
+        <name>fvec_inner_product_hook</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="faiss/FaissHook.h" line="22" column="32" declfile="faiss/FaissHook.h" declline="22" declcolumn="32"/>
+      </memberdef>
       <memberdef kind="variable" id="namespacefaiss_1a2dcf7a9c4c343f31bc63a5db0c2bff2d" prot="public" static="no" mutable="no">
         <type>FAISS_API <ref refid="structfaiss_1_1HNSWStats" kindref="compound">HNSWStats</ref></type>
         <definition>FAISS_API HNSWStats faiss::hnsw_stats</definition>
@@ -1107,6 +1185,66 @@
         <inbodydescription>
         </inbodydescription>
         <location file="faiss/Clustering.h" line="195" column="7" declfile="faiss/Clustering.h" declline="195" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefaiss_1a0ce28301f6059e36eaa9633159edad89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FAISS_API void</type>
+        <definition>FAISS_API void faiss::set_fvec_L2sqr_hook</definition>
+        <argsstring>(FVEC_L2SQR_HOOK_C hook)</argsstring>
+        <name>set_fvec_L2sqr_hook</name>
+        <param>
+          <type>FVEC_L2SQR_HOOK_C</type>
+          <declname>hook</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="faiss/FaissHook.h" line="31" column="16" declfile="faiss/FaissHook.h" declline="31" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefaiss_1a6e92764f11f0570e924f93a1caaf2da6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FAISS_API FVEC_L2SQR_HOOK_C</type>
+        <definition>FAISS_API FVEC_L2SQR_HOOK_C faiss::get_fvec_L2sqr_hook</definition>
+        <argsstring>()</argsstring>
+        <name>get_fvec_L2sqr_hook</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="faiss/FaissHook.h" line="32" column="29" declfile="faiss/FaissHook.h" declline="32" declcolumn="29"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefaiss_1a3acaf9b9f0da6865748995cfaef692c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FAISS_API void</type>
+        <definition>FAISS_API void faiss::set_fvec_inner_product_hook</definition>
+        <argsstring>(FVEC_INNER_PRODUCT_HOOK_C hook)</argsstring>
+        <name>set_fvec_inner_product_hook</name>
+        <param>
+          <type>FVEC_INNER_PRODUCT_HOOK_C</type>
+          <declname>hook</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="faiss/FaissHook.h" line="34" column="16" declfile="faiss/FaissHook.h" declline="34" declcolumn="16"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefaiss_1ab5ef283422b321a3d6d2694139417cab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>FAISS_API FVEC_INNER_PRODUCT_HOOK_C</type>
+        <definition>FAISS_API FVEC_INNER_PRODUCT_HOOK_C faiss::get_fvec_inner_product_hook</definition>
+        <argsstring>()</argsstring>
+        <name>get_fvec_inner_product_hook</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="faiss/FaissHook.h" line="35" column="37" declfile="faiss/FaissHook.h" declline="35" declcolumn="37"/>
       </memberdef>
       <memberdef kind="function" id="namespacefaiss_1a9ea277840d6448e42b304287257de0b7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
