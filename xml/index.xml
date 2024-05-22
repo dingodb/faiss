@@ -2791,6 +2791,8 @@
     <member refid="structfaiss_1_1IndexIDMap2Template_1aee4b15cf1872fb69d8a6adf25da3c253" kind="typedef"><name>component_t</name></member>
     <member refid="structfaiss_1_1IndexIDMap2Template_1a33649b40957664a1437c385b0e77ccbe" kind="typedef"><name>distance_t</name></member>
     <member refid="structfaiss_1_1IndexIDMap2Template_1ae11b9dae4245ace5eb2a28ad6a5fdff9" kind="variable"><name>rev_map</name></member>
+    <member refid="structfaiss_1_1IndexIDMap2Template_1a5dc50ee48b6e9ede6f419d971c577e0a" kind="variable"><name>delete_id_map_value</name></member>
+    <member refid="structfaiss_1_1IndexIDMap2Template_1a130c9964966d176de3bea965d99fa0eb" kind="variable"><name>min_max_id_map_index</name></member>
     <member refid="structfaiss_1_1IndexIDMapTemplate_1a2b6e5fb115db333ad99e25de74864fdf" kind="variable"><name>index</name></member>
     <member refid="structfaiss_1_1IndexIDMapTemplate_1a6312303b535755beee7b487c99b07df1" kind="variable"><name>own_fields</name></member>
     <member refid="structfaiss_1_1IndexIDMapTemplate_1a223985f0cd852b3ae7372506022662e0" kind="variable"><name>id_map</name></member>
