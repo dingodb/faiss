@@ -9,6 +9,8 @@
     <includedby refid="IndexIDMap_8h" local="no">faiss/IndexIDMap.h</includedby>
     <includedby refid="IndexIVF_8h" local="no">faiss/IndexIVF.h</includedby>
     <includedby refid="python__callbacks_8h" local="no">faiss/python/python_callbacks.h</includedby>
+    <includedby refid="approx__topk__hamming_8h" local="no">faiss/utils/approx_topk_hamming/approx_topk_hamming.h</includedby>
+    <includedby refid="hamming_8h" local="no">faiss/utils/hamming.h</includedby>
     <incdepgraph>
       <node id="5">
         <label>faiss/impl/platform_macros.h</label>
@@ -124,6 +126,14 @@
         <label>faiss/MetaIndexes.h</label>
         <link refid="MetaIndexes_8h_source"/>
       </node>
+      <node id="29">
+        <label>faiss/utils/approx_topk_hamming/approx_topk_hamming.h</label>
+        <link refid="approx__topk__hamming_8h_source"/>
+      </node>
+      <node id="30">
+        <label>faiss/utils/hamming.h</label>
+        <link refid="hamming_8h_source"/>
+      </node>
       <node id="16">
         <label>faiss/IndexIVFFlat.h</label>
         <link refid="IndexIVFFlat_8h_source"/>
@@ -146,6 +156,10 @@
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
         </childnode>
       </node>
       <node id="21">
