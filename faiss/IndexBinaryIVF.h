@@ -148,7 +148,8 @@ struct IndexBinaryIVF : IndexBinary {
             int radius,
             const idx_t* assign,
             const int32_t* centroid_dis,
-            RangeSearchResult* result) const;
+            RangeSearchResult* result,
+            const IVFSearchParameters* params=nullptr) const;
 
     void reconstruct(idx_t key, uint8_t* recons) const override;
 
@@ -243,14 +244,16 @@ struct BinaryInvertedListScanner {
             const idx_t* ids,
             int32_t* distances,
             idx_t* labels,
-            size_t k) const = 0;
+            size_t k,
+            const faiss::IDSelector* sel=nullptr) const = 0;
 
     virtual void scan_codes_range(
             size_t n,
             const uint8_t* codes,
             const idx_t* ids,
             int radius,
-            RangeQueryResult& result) const = 0;
+            RangeQueryResult& result,
+            const faiss::IDSelector* sel=nullptr) const = 0;
 
     virtual ~BinaryInvertedListScanner() {}
 };
