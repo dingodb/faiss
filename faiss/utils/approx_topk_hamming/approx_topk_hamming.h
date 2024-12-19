@@ -11,6 +11,7 @@
 #include <limits>
 #include <utility>
 
+#include <faiss/impl/IDSelector.h>
 #include <faiss/utils/Heap.h>
 #include <faiss/utils/simdlib.h>
 
@@ -46,9 +47,11 @@ struct HeapWithBucketsForHamming32<
             // output distances
             int* const __restrict bh_val,
             // output indices, each being within [0, n) range
-            int64_t* const __restrict bh_ids) {
+            int64_t* const __restrict bh_ids,
+            size_t globe_size,
+            const faiss::IDSelector* sel = nullptr) {
         // forward a call to bs_addn with 1 beam
-        bs_addn(1, n, hc, binaryVectors, k, bh_val, bh_ids);
+        bs_addn(1, n, hc, binaryVectors, k, bh_val, bh_ids, globe_size, sel);
     }
 
     static void bs_addn(
@@ -66,7 +69,9 @@ struct HeapWithBucketsForHamming32<
             int* const __restrict bh_val,
             // output indices, each being within [0, n_per_beam * beam_size)
             // range
-            int64_t* const __restrict bh_ids) {
+            int64_t* const __restrict bh_ids,
+            size_t globe_size,
+            const faiss::IDSelector* sel = nullptr) {
         //
         using C = CMax<int, int64_t>;
 
@@ -96,6 +101,12 @@ struct HeapWithBucketsForHamming32<
                 for (uint32_t j = 0; j < NBUCKETS_8; j++) {
                     uint32_t hamming_distances[8];
                     for (size_t j8 = 0; j8 < 8; j8++) {
+                        const auto index = globe_size + j8 + j * 8 + ip +
+                                n_per_beam * beam_index;
+                        if (sel && !sel->is_member(index)) {
+                            hamming_distances[j8] = std::numeric_limits<uint32_t>::max();
+                            continue;
+                        }
                         hamming_distances[j8] = hc.hamming(
                                 binary_vectors +
                                 (j8 + j * 8 + ip + n_per_beam * beam_index) *
@@ -168,11 +179,15 @@ struct HeapWithBucketsForHamming32<
             // process leftovers
             for (uint32_t ip = nb; ip < n_per_beam; ip++) {
                 const auto index = ip + n_per_beam * beam_index;
+                if (sel && !sel->is_member(index + globe_size)) {
+                    continue;
+                }
                 const auto value =
                         hc.hamming(binary_vectors + (index)*code_size);
 
                 if (C::cmp(bh_val[0], value)) {
-                    heap_replace_top<C>(k, bh_val, bh_ids, value, index);
+                    heap_replace_top<C>(
+                            k, bh_val, bh_ids, value, index + globe_size);
                 }
             }
         }
@@ -249,23 +264,7 @@ struct HeapWithBucketsForHamming16<
                 for (uint32_t p = 0; p < N; p++) {
                     min_distances_i[j][p] =
                             simd16uint16(std::numeric_limits<int16_t>::max());
-                    min_indices_i[j][p] = simd16uint16(
-                            0,
-                            1,
-                            2,
-                            3,
-                            4,
-                            5,
-                            6,
-                            7,
-                            8,
-                            9,
-                            10,
-                            11,
-                            12,
-                            13,
-                            14,
-                            15);
+                    min_indices_i[j][p] = simd16uint16(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
                 }
             }
 
