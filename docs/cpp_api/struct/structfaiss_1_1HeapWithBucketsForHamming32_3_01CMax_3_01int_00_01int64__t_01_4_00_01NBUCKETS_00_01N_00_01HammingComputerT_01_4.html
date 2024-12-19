@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en">
 <head>
@@ -6,20 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Struct faiss::HeapWithBucketsForHamming32&lt; CMax&lt; int, int64_t &gt;, NBUCKETS, N, HammingComputerT &gt; &mdash; Faiss  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
 
   
     <link rel="canonical" href="https://faiss.ai/cpp_api/struct/structfaiss_1_1HeapWithBucketsForHamming32_3_01CMax_3_01int_00_01int64__t_01_4_00_01NBUCKETS_00_01N_00_01HammingComputerT_01_4.html" />
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
-        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3ba4146"></script>
+      <script src="../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -422,12 +419,12 @@
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="structfaiss_1_1HeapWithBucketsForHamming32_3_01CMax_3_01int_00_01int64__t_01_4_00_01NBUCKETS_00_01N_00_01HammingComputerT_01_4_1a55d7edca6fba66c8615d4b29f7cf24b4"></span><span class="sig-name descname"><span class="pre">static</span> <span class="pre">inline</span> <span class="pre">void</span> <span class="pre">addn</span> <span class="pre">(const</span> <span class="pre">uint32_t</span> <span class="pre">n,</span> <span class="pre">const</span> <span class="pre">HammingComputerT</span> <span class="pre">&amp;hc,</span> <span class="pre">const</span> <span class="pre">uint8_t</span> <span class="pre">*const</span> <span class="pre">__restrict</span> <span class="pre">binaryVectors,</span> <span class="pre">const</span> <span class="pre">uint32_t</span> <span class="pre">k,</span> <span class="pre">int</span> <span class="pre">*const</span> <span class="pre">__restrict</span> <span class="pre">bh_val,</span> <span class="pre">int64_t</span> <span class="pre">*const</span> <span class="pre">__restrict</span> <span class="pre">bh_ids)</span></span></dt>
+<span class="target" id="structfaiss_1_1HeapWithBucketsForHamming32_3_01CMax_3_01int_00_01int64__t_01_4_00_01NBUCKETS_00_01N_00_01HammingComputerT_01_4_1a863f4f3ac0ba5bec8fc90a4f326e7637"></span><span class="sig-name descname"><span class="pre">static</span> <span class="pre">inline</span> <span class="pre">void</span> <span class="pre">addn</span> <span class="pre">(const</span> <span class="pre">uint32_t</span> <span class="pre">n,</span> <span class="pre">const</span> <span class="pre">HammingComputerT</span> <span class="pre">&amp;hc,</span> <span class="pre">const</span> <span class="pre">uint8_t</span> <span class="pre">*const</span> <span class="pre">__restrict</span> <span class="pre">binaryVectors,</span> <span class="pre">const</span> <span class="pre">uint32_t</span> <span class="pre">k,</span> <span class="pre">int</span> <span class="pre">*const</span> <span class="pre">__restrict</span> <span class="pre">bh_val,</span> <span class="pre">int64_t</span> <span class="pre">*const</span> <span class="pre">__restrict</span> <span class="pre">bh_ids,</span> <span class="pre">size_t</span> <span class="pre">globe_size,</span> <span class="pre">const</span> <span class="pre">faiss::IDSelector</span> <span class="pre">*sel=nullptr)</span></span></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
-<span class="target" id="structfaiss_1_1HeapWithBucketsForHamming32_3_01CMax_3_01int_00_01int64__t_01_4_00_01NBUCKETS_00_01N_00_01HammingComputerT_01_4_1afa7026574eb078b135203d287244fbd4"></span><span class="sig-name descname"><span class="pre">static</span> <span class="pre">inline</span> <span class="pre">void</span> <span class="pre">bs_addn</span> <span class="pre">(const</span> <span class="pre">uint32_t</span> <span class="pre">beam_size,</span> <span class="pre">const</span> <span class="pre">uint32_t</span> <span class="pre">n_per_beam,</span> <span class="pre">const</span> <span class="pre">HammingComputerT</span> <span class="pre">&amp;hc,</span> <span class="pre">const</span> <span class="pre">uint8_t</span> <span class="pre">*const</span> <span class="pre">__restrict</span> <span class="pre">binary_vectors,</span> <span class="pre">const</span> <span class="pre">uint32_t</span> <span class="pre">k,</span> <span class="pre">int</span> <span class="pre">*const</span> <span class="pre">__restrict</span> <span class="pre">bh_val,</span> <span class="pre">int64_t</span> <span class="pre">*const</span> <span class="pre">__restrict</span> <span class="pre">bh_ids)</span></span></dt>
+<span class="target" id="structfaiss_1_1HeapWithBucketsForHamming32_3_01CMax_3_01int_00_01int64__t_01_4_00_01NBUCKETS_00_01N_00_01HammingComputerT_01_4_1a480b83bbbdb74adad2f27b2b431387d0"></span><span class="sig-name descname"><span class="pre">static</span> <span class="pre">inline</span> <span class="pre">void</span> <span class="pre">bs_addn</span> <span class="pre">(const</span> <span class="pre">uint32_t</span> <span class="pre">beam_size,</span> <span class="pre">const</span> <span class="pre">uint32_t</span> <span class="pre">n_per_beam,</span> <span class="pre">const</span> <span class="pre">HammingComputerT</span> <span class="pre">&amp;hc,</span> <span class="pre">const</span> <span class="pre">uint8_t</span> <span class="pre">*const</span> <span class="pre">__restrict</span> <span class="pre">binary_vectors,</span> <span class="pre">const</span> <span class="pre">uint32_t</span> <span class="pre">k,</span> <span class="pre">int</span> <span class="pre">*const</span> <span class="pre">__restrict</span> <span class="pre">bh_val,</span> <span class="pre">int64_t</span> <span class="pre">*const</span> <span class="pre">__restrict</span> <span class="pre">bh_ids,</span> <span class="pre">size_t</span> <span class="pre">globe_size,</span> <span class="pre">const</span> <span class="pre">faiss::IDSelector</span> <span class="pre">*sel=nullptr)</span></span></dt>
 <dd></dd></dl>
 
 </div>
