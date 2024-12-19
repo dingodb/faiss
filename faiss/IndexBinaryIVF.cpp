@@ -113,25 +113,38 @@ void IndexBinaryIVF::search(
         idx_t k,
         int32_t* distances,
         idx_t* labels,
-        const SearchParameters* params) const {
-    FAISS_THROW_IF_NOT_MSG(
-            !params, "search params not supported for this index");
+        const SearchParameters* params_in) const {
+    const IVFSearchParameters* params = nullptr;
+    if (params_in) {
+        params = dynamic_cast<const IVFSearchParameters*>(params_in);
+        FAISS_THROW_IF_NOT_MSG(
+                params, "IndexBinaryIVF params have incorrect type");
+    }
+    const size_t nprobe_2 =
+            std::min(nlist, params ? params->nprobe : this->nprobe);
     FAISS_THROW_IF_NOT(k > 0);
-    FAISS_THROW_IF_NOT(nprobe > 0);
+    FAISS_THROW_IF_NOT(nprobe_2 > 0);
 
-    const size_t nprobe_2 = std::min(nlist, this->nprobe);
     std::unique_ptr<idx_t[]> idx(new idx_t[n * nprobe_2]);
     std::unique_ptr<int32_t[]> coarse_dis(new int32_t[n * nprobe_2]);
 
     double t0 = getmillisecs();
-    quantizer->search(n, x, nprobe_2, coarse_dis.get(), idx.get());
+    quantizer->search(n, x, nprobe_2, coarse_dis.get(), idx.get(), nullptr);
     indexIVF_stats.quantization_time += getmillisecs() - t0;
 
     t0 = getmillisecs();
     invlists->prefetch_lists(idx.get(), n * nprobe_2);
 
     search_preassigned(
-            n, x, k, idx.get(), coarse_dis.get(), distances, labels, false);
+            n,
+            x,
+            k,
+            idx.get(),
+            coarse_dis.get(),
+            distances,
+            labels,
+            false,
+            params);
     indexIVF_stats.search_time += getmillisecs() - t0;
 }
 
@@ -335,11 +348,16 @@ struct IVFBinaryScannerL2 : BinaryInvertedListScanner {
             const idx_t* __restrict ids,
             int32_t* __restrict simi,
             idx_t* __restrict idxi,
-            size_t k) const override {
+            size_t k,
+            const faiss::IDSelector* sel) const override {
         using C = CMax<int32_t, idx_t>;
 
         size_t nup = 0;
         for (size_t j = 0; j < n; j++) {
+            if (sel &&
+                !sel->is_member(store_pairs ? lo_build(list_no, j) : ids[j])) {
+                continue;
+            }
             uint32_t dis = hc.hamming(codes);
             if (dis < simi[0]) {
                 idx_t id = store_pairs ? lo_build(list_no, j) : ids[j];
@@ -356,8 +374,13 @@ struct IVFBinaryScannerL2 : BinaryInvertedListScanner {
             const uint8_t* __restrict codes,
             const idx_t* __restrict ids,
             int radius,
-            RangeQueryResult& result) const override {
+            RangeQueryResult& result,
+            const faiss::IDSelector* sel) const override {
         for (size_t j = 0; j < n; j++) {
+            if (sel &&
+                !sel->is_member(store_pairs ? lo_build(list_no, j) : ids[j])) {
+                continue;
+            }
             uint32_t dis = hc.hamming(codes);
             if (dis < radius) {
                 int64_t id = store_pairs ? lo_build(list_no, j) : ids[j];
@@ -441,7 +464,13 @@ void search_knn_hamming_heap(
                 }
 
                 nheap += scanner->scan_codes(
-                        list_size, scodes.get(), ids, simi, idxi, k);
+                        list_size,
+                        scodes.get(),
+                        ids,
+                        simi,
+                        idxi,
+                        k,
+                        params ? params->sel : nullptr);
 
                 nscan += list_size;
                 if (max_codes && nscan >= max_codes)
@@ -807,21 +836,30 @@ void IndexBinaryIVF::range_search(
         const uint8_t* __restrict x,
         int radius,
         RangeSearchResult* __restrict res,
-        const SearchParameters* params) const {
-    FAISS_THROW_IF_NOT_MSG(
-            !params, "search params not supported for this index");
-    const size_t nprobe_2 = std::min(nlist, this->nprobe);
+        const SearchParameters* params_in) const {
+    const IVFSearchParameters* params = nullptr;
+    if (params_in) {
+        params = dynamic_cast<const IVFSearchParameters*>(params_in);
+        FAISS_THROW_IF_NOT_MSG(
+                params, "IndexBinaryIVF params have incorrect type");
+    }
+    const size_t nprobe_2 =
+            std::min(nlist, params ? params->nprobe : this->nprobe);
+    
+    FAISS_THROW_IF_NOT(nprobe_2 > 0);
+
     std::unique_ptr<idx_t[]> idx(new idx_t[n * nprobe_2]);
     std::unique_ptr<int32_t[]> coarse_dis(new int32_t[n * nprobe_2]);
 
     double t0 = getmillisecs();
-    quantizer->search(n, x, nprobe_2, coarse_dis.get(), idx.get());
+    quantizer->search(n, x, nprobe_2, coarse_dis.get(), idx.get(),nullptr);
     indexIVF_stats.quantization_time += getmillisecs() - t0;
 
     t0 = getmillisecs();
     invlists->prefetch_lists(idx.get(), n * nprobe_2);
 
-    range_search_preassigned(n, x, radius, idx.get(), coarse_dis.get(), res);
+    range_search_preassigned(
+            n, x, radius, idx.get(), coarse_dis.get(), res, params);
 
     indexIVF_stats.search_time += getmillisecs() - t0;
 }
@@ -832,7 +870,8 @@ void IndexBinaryIVF::range_search_preassigned(
         int radius,
         const idx_t* __restrict assign,
         const int32_t* __restrict centroid_dis,
-        RangeSearchResult* __restrict res) const {
+        RangeSearchResult* __restrict res,
+        const IVFSearchParameters* params) const {
     const size_t nprobe_2 = std::min(nlist, this->nprobe);
     bool store_pairs = false;
     size_t nlistv = 0, ndis = 0;
@@ -870,7 +909,12 @@ void IndexBinaryIVF::range_search_preassigned(
             nlistv++;
             ndis += list_size;
             scanner->scan_codes_range(
-                    list_size, scodes.get(), ids.get(), radius, qres);
+                    list_size,
+                    scodes.get(),
+                    ids.get(),
+                    radius,
+                    qres,
+                    params ? params->sel : nullptr);
         };
 
 #pragma omp for
