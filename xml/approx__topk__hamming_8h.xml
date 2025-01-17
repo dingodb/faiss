@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="approx__topk__hamming_8h" kind="file" language="C++">
     <compoundname>approx_topk_hamming.h</compoundname>
     <includes local="no">algorithm</includes>
@@ -9,49 +9,10 @@
     <includes refid="Heap_8h" local="no">faiss/utils/Heap.h</includes>
     <includes refid="simdlib_8h" local="no">faiss/utils/simdlib.h</includes>
     <incdepgraph>
-      <node id="3">
-        <label>limits</label>
-      </node>
-      <node id="9">
-        <label>faiss/impl/platform_macros.h</label>
-        <link refid="platform__macros_8h_source"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>cstdint</label>
-      </node>
-      <node id="16">
-        <label>stdint.h</label>
-      </node>
-      <node id="14">
-        <label>cmath</label>
-      </node>
-      <node id="17">
-        <label>cassert</label>
-      </node>
-      <node id="21">
-        <label>string</label>
-      </node>
-      <node id="6">
-        <label>unordered_set</label>
-      </node>
-      <node id="1">
-        <label>faiss/utils/approx_topk_hamming/approx_topk_hamming.h</label>
-        <link refid="approx__topk__hamming_8h"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
+      <node id="8">
+        <label>faiss/MetricType.h</label>
+        <link refid="MetricType_8h_source"/>
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="5">
@@ -64,14 +25,13 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="11">
-        <label>cstdio</label>
-      </node>
-      <node id="7">
-        <label>vector</label>
-      </node>
-      <node id="4">
-        <label>utility</label>
+      <node id="9">
+        <label>faiss/impl/platform_macros.h</label>
+        <link refid="platform__macros_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
       </node>
       <node id="12">
         <label>faiss/utils/Heap.h</label>
@@ -93,6 +53,22 @@
         <childnode refid="18" relation="include">
         </childnode>
       </node>
+      <node id="1">
+        <label>faiss/utils/approx_topk_hamming/approx_topk_hamming.h</label>
+        <link refid="approx__topk__hamming_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
       <node id="18">
         <label>faiss/utils/ordered_key_value.h</label>
         <link refid="ordered__key__value_8h_source"/>
@@ -101,6 +77,12 @@
         <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>faiss/utils/simdlib.h</label>
+        <link refid="simdlib_8h_source"/>
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
       <node id="20">
@@ -115,26 +97,44 @@
         <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="13">
-        <label>climits</label>
-      </node>
-      <node id="8">
-        <label>faiss/MetricType.h</label>
-        <link refid="MetricType_8h_source"/>
-        <childnode refid="9" relation="include">
-        </childnode>
-      </node>
-      <node id="19">
-        <label>faiss/utils/simdlib.h</label>
-        <link refid="simdlib_8h_source"/>
-        <childnode refid="20" relation="include">
-        </childnode>
-      </node>
       <node id="2">
         <label>algorithm</label>
       </node>
+      <node id="17">
+        <label>cassert</label>
+      </node>
+      <node id="13">
+        <label>climits</label>
+      </node>
+      <node id="14">
+        <label>cmath</label>
+      </node>
+      <node id="10">
+        <label>cstdint</label>
+      </node>
+      <node id="11">
+        <label>cstdio</label>
+      </node>
       <node id="15">
         <label>cstring</label>
+      </node>
+      <node id="3">
+        <label>limits</label>
+      </node>
+      <node id="16">
+        <label>stdint.h</label>
+      </node>
+      <node id="21">
+        <label>string</label>
+      </node>
+      <node id="6">
+        <label>unordered_set</label>
+      </node>
+      <node id="4">
+        <label>utility</label>
+      </node>
+      <node id="7">
+        <label>vector</label>
       </node>
     </incdepgraph>
     <innerclass refid="structfaiss_1_1HeapWithBucketsForHamming32" prot="public">faiss::HeapWithBucketsForHamming32</innerclass>
@@ -179,8 +179,8 @@
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NBUCKETS,</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>N,</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>HammingComputerT&gt;<sp/>{</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/>uint32_t<sp/>NBUCKETS_8<sp/>=<sp/>NBUCKETS<sp/>/<sp/>8;</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>static_assert(</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>NBUCKETS_8<sp/>=<sp/>NBUCKETS<sp/>/<sp/>8;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
 <codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(NBUCKETS)<sp/>&gt;<sp/>0<sp/>&amp;&amp;<sp/>((NBUCKETS<sp/>%<sp/>8)<sp/>==<sp/>0),</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Number<sp/>of<sp/>buckets<sp/>needs<sp/>to<sp/>be<sp/>8,<sp/>16,<sp/>24,<sp/>...&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight></codeline>
@@ -222,7 +222,7 @@
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>globe_size,</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structfaiss_1_1IDSelector" kindref="compound">faiss::IDSelector</ref>*<sp/>sel<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>C<sp/>=<sp/><ref refid="structfaiss_1_1CMax" kindref="compound">CMax&lt;int, int64_t&gt;</ref>;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">C<sp/>=<sp/><ref refid="structfaiss_1_1CMax" kindref="compound">CMax&lt;int, int64_t&gt;</ref>;</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"></highlight></codeline>
 <codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Hamming<sp/>code<sp/>size</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>code_size<sp/>=<sp/>hc.get_code_size();</highlight></codeline>
@@ -360,8 +360,8 @@
 <codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NBUCKETS,</highlight></codeline>
 <codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>N,</highlight></codeline>
 <codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>HammingComputerT&gt;<sp/>{</highlight></codeline>
-<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>constexpr<sp/>uint32_t<sp/>NBUCKETS_16<sp/>=<sp/>NBUCKETS<sp/>/<sp/>16;</highlight></codeline>
-<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/>static_assert(</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>uint32_t<sp/>NBUCKETS_16<sp/>=<sp/>NBUCKETS<sp/>/<sp/>16;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
 <codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(NBUCKETS)<sp/>&gt;<sp/>0<sp/>&amp;&amp;<sp/>((NBUCKETS<sp/>%<sp/>16)<sp/>==<sp/>0),</highlight></codeline>
 <codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Number<sp/>of<sp/>buckets<sp/>needs<sp/>to<sp/>be<sp/>16,<sp/>32,<sp/>48...&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="218"><highlight class="normal"></highlight></codeline>
@@ -399,7 +399,7 @@
 <codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>range</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int64_t*<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>__restrict<sp/>bh_ids)<sp/>{</highlight></codeline>
 <codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>C<sp/>=<sp/><ref refid="structfaiss_1_1CMax" kindref="compound">CMax&lt;int, int64_t&gt;</ref>;</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">C<sp/>=<sp/><ref refid="structfaiss_1_1CMax" kindref="compound">CMax&lt;int, int64_t&gt;</ref>;</highlight></codeline>
 <codeline lineno="254"><highlight class="normal"></highlight></codeline>
 <codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Hamming<sp/>code<sp/>size</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>code_size<sp/>=<sp/>hc.get_code_size();</highlight></codeline>
