@@ -11,8 +11,10 @@
 #include <faiss/MetricType.h>
 #include <faiss/impl/FaissAssert.h>
 #include <faiss/utils/distances.h>
-#include <cmath>
+#include <climits>
 #include <type_traits>
+#include <cstddef> 
+#include <faiss/utils/hamming_distance/common.h>
 
 namespace faiss {
 
@@ -23,6 +25,7 @@ struct VectorDistance {
     static constexpr bool is_similarity = is_similarity_metric(mt);
 
     inline float operator()(const float* x, const float* y) const;
+    inline size_t operator()(const uint8_t* x, const uint8_t* y) const;
 
     // heap template to use for this type of metric
     using C = typename std::conditional<
@@ -43,6 +46,17 @@ inline float VectorDistance<METRIC_INNER_PRODUCT>::operator()(
         const float* x,
         const float* y) const {
     return fvec_inner_product(x, y, d);
+}
+
+template<>
+inline size_t VectorDistance<METRIC_HAMMING>::operator()(
+        const uint8_t* x,
+        const uint8_t* y) const {
+    int h = 0;
+    for (size_t i = 0; i < d; i++) {
+        h += (int)hamdis_tab_ham_bytes[x[i] ^ y[i]];
+    }
+    return h;
 }
 
 template <>
