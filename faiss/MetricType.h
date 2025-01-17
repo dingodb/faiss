@@ -25,6 +25,7 @@ enum MetricType {
     METRIC_L1,                ///< L1 (aka cityblock)
     METRIC_Linf,              ///< infinity distance
     METRIC_Lp,                ///< L_p distance, p is given by a faiss::Index
+    METRIC_HAMMING,           ///< Hamming distance for binary vectors  
                               /// metric_arg
 
     /// some additional metrics defined in scipy.spatial.distance
