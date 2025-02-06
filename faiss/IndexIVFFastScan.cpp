@@ -694,7 +694,7 @@ void IndexIVFFastScan::range_search_dispatch_implem(
             search_implem_10(
                     n, x, *handler.get(), cq, &ndis, &nlist_visited, scaler);
         } else {
-            FAISS_THROW_FMT("Range search implem %d not impemented", impl);
+            FAISS_THROW_FMT("Range search implem %d not implemented", impl);
         }
     } else {
         // explicitly slice over threads
@@ -914,10 +914,6 @@ void IndexIVFFastScan::search_implem_10(
         size_t* nlist_out,
         const NormTableScaler* scaler,
         const IVFSearchParameters* params) const {
-    const size_t max_codes = params ? params->max_codes : this->max_codes;
-    const SearchParameters* quantizer_params =
-            params ? params->quantizer_params : nullptr;
-
     size_t dim12 = ksub * M2;
     AlignedTable<uint8_t> dis_tables;
     AlignedTable<uint16_t> biases;

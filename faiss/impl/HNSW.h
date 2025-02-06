@@ -46,6 +46,7 @@ struct ResultHandler;
 struct SearchParametersHNSW : SearchParameters {
     int efSearch = 16;
     bool check_relative_distance = true;
+    bool bounded_queue = true;
 
     ~SearchParametersHNSW() {}
 };
@@ -141,9 +142,6 @@ struct HNSW {
     /// enough?
     bool check_relative_distance = true;
 
-    /// number of entry points in levels > 0.
-    int upper_beam = 1;
-
     /// use bounded queue during exploration
     bool search_bounded_queue = true;
 
@@ -184,7 +182,8 @@ struct HNSW {
             float d_nearest,
             int level,
             omp_lock_t* locks,
-            VisitedTable& vt);
+            VisitedTable& vt,
+            bool keep_max_size_level0 = false);
 
     /** add point pt_id on all levels <= pt_level and build the link
      * structure for them. */
@@ -193,7 +192,8 @@ struct HNSW {
             int pt_level,
             int pt_id,
             std::vector<omp_lock_t>& locks,
-            VisitedTable& vt);
+            VisitedTable& vt,
+            bool keep_max_size_level0 = false);
 
     /// search interface for 1 point, single thread
     HNSWStats search(
@@ -211,7 +211,8 @@ struct HNSW {
             const float* nearest_d,
             int search_type,
             HNSWStats& search_stats,
-            VisitedTable& vt) const;
+            VisitedTable& vt,
+            const SearchParametersHNSW* params = nullptr) const;
 
     void reset();
 
@@ -224,30 +225,60 @@ struct HNSW {
             DistanceComputer& qdis,
             std::priority_queue<NodeDistFarther>& input,
             std::vector<NodeDistFarther>& output,
-            int max_size);
+            int max_size,
+            bool keep_max_size_level0 = false);
 
     void permute_entries(const idx_t* map);
 };
 
 struct HNSWStats {
-    size_t n1 = 0; /// numbner of vectors searched
+    size_t n1 = 0; /// number of vectors searched
     size_t n2 =
-            0; /// number of queries for which the candidate list is exhasted
-    size_t ndis = 0; /// number of distances computed
+            0; /// number of queries for which the candidate list is exhausted
+    size_t ndis = 0;  /// number of distances computed
+    size_t nhops = 0; /// number of hops aka number of edges traversed
 
     void reset() {
         n1 = n2 = 0;
         ndis = 0;
+        nhops = 0;
     }
 
     void combine(const HNSWStats& other) {
         n1 += other.n1;
         n2 += other.n2;
         ndis += other.ndis;
+        nhops += other.nhops;
     }
 };
 
 // global var that collects them all
 FAISS_API extern HNSWStats hnsw_stats;
+
+int search_from_candidates(
+        const HNSW& hnsw,
+        DistanceComputer& qdis,
+        ResultHandler<HNSW::C>& res,
+        HNSW::MinimaxHeap& candidates,
+        VisitedTable& vt,
+        HNSWStats& stats,
+        int level,
+        int nres_in = 0,
+        const SearchParametersHNSW* params = nullptr);
+
+HNSWStats greedy_update_nearest(
+        const HNSW& hnsw,
+        DistanceComputer& qdis,
+        int level,
+        HNSW::storage_idx_t& nearest,
+        float& d_nearest);
+
+std::priority_queue<HNSW::Node> search_from_candidate_unbounded(
+        const HNSW& hnsw,
+        const HNSW::Node& node,
+        DistanceComputer& qdis,
+        int ef,
+        VisitedTable* vt,
+        HNSWStats& stats);
 
 } // namespace faiss

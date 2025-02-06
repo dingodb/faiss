@@ -26,8 +26,7 @@ from faiss.contrib.exhaustive_search import \
     range_search_max_results, exponential_query_iterator
 from contextlib import contextmanager
 
-@unittest.skipIf(platform.python_version_tuple()[0] < '3',
-                 'Submodule import broken in python 2.')
+
 class TestComputeGT(unittest.TestCase):
 
     def do_test_compute_GT(self, metric=faiss.METRIC_L2):
@@ -147,7 +146,6 @@ class TestExhaustiveSearch(unittest.TestCase):
         xb = ds.get_database()
         D, I = faiss.knn(xq, xb, 10, metric=metric)
         threshold = float(D[:, -1].mean())
-        print(threshold)
 
         index = faiss.IndexFlat(32, metric)
         index.add(xb)
@@ -251,7 +249,6 @@ class TestRangeEval(unittest.TestCase):
         Inew = np.hstack(Inew)
 
         precision, recall = evaluation.range_PR(lims_ref, Iref, lims_new, Inew)
-        print(precision, recall)
 
         self.assertEqual(precision, 0.6)
         self.assertEqual(recall, 0.6)
@@ -518,6 +515,26 @@ class TestRangeSearchMaxResults(unittest.TestCase):
 
 
 class TestClustering(unittest.TestCase):
+
+    def test_python_kmeans(self):
+        """ Test the python implementation of kmeans """
+        ds = datasets.SyntheticDataset(32, 10000, 0, 0)
+        x = ds.get_train()
+
+        # bad distribution to stress-test split code
+        xt = x[:10000].copy()
+        xt[:5000] = x[0]
+
+        km_ref = faiss.Kmeans(ds.d, 100, niter=10)
+        km_ref.train(xt)
+        err = faiss.knn(xt, km_ref.centroids, 1)[0].sum()
+
+        data = clustering.DatasetAssign(xt)
+        centroids = clustering.kmeans(100, data, 10)
+        err2 = faiss.knn(xt, centroids, 1)[0].sum()
+
+        # err=33498.332 err2=33380.477
+        self.assertLess(err2, err * 1.1)
 
     def test_2level(self):
         " verify that 2-level clustering is not too sub-optimal "

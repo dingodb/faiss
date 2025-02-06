@@ -257,6 +257,14 @@ void StandardGpuResourcesImpl::setDefaultStream(
         if (prevStream != stream) {
             streamWait({stream}, {prevStream});
         }
+#if defined USE_NVIDIA_RAFT
+        // delete the raft handle for this device, which will be initialized
+        // with the updated stream during any subsequent calls to getRaftHandle
+        auto it2 = raftHandles_.find(device);
+        if (it2 != raftHandles_.end()) {
+            raftHandles_.erase(it2);
+        }
+#endif
     }
 
     userDefaultStreams_[device] = stream;
@@ -275,6 +283,14 @@ void StandardGpuResourcesImpl::revertDefaultStream(int device) {
 
             streamWait({newStream}, {prevStream});
         }
+#if defined USE_NVIDIA_RAFT
+        // delete the raft handle for this device, which will be initialized
+        // with the updated stream during any subsequent calls to getRaftHandle
+        auto it2 = raftHandles_.find(device);
+        if (it2 != raftHandles_.end()) {
+            raftHandles_.erase(it2);
+        }
+#endif
     }
 
     userDefaultStreams_.erase(device);
@@ -347,11 +363,20 @@ void StandardGpuResourcesImpl::initializeForDevice(int device) {
             prop.major,
             prop.minor);
 
+#if USE_AMD_ROCM
+    // Our code is pre-built with and expects warpSize == 32 or 64, validate
+    // that
+    FAISS_ASSERT_FMT(
+            prop.warpSize == 32 || prop.warpSize == 64,
+            "Device id %d does not have expected warpSize of 32 or 64",
+            device);
+#else
     // Our code is pre-built with and expects warpSize == 32, validate that
     FAISS_ASSERT_FMT(
             prop.warpSize == 32,
             "Device id %d does not have expected warpSize of 32",
             device);
+#endif
 
     // Create streams
     cudaStream_t defaultStream = nullptr;
